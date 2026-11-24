@@ -1,0 +1,20 @@
+---
+description: OralSense product identity — what it is, what it is not, who it is for
+alwaysApply: true
+---
+
+# OralSense identity
+
+OralSense is a **computational assessment engine** for standardized oral sensory measurement (clinicians/researchers, not consumers). Full constitution: `docs/PRODUCT_CONTEXT.md`.
+
+Use:
+
+> OralSense is a digital platform that standardizes and analyzes oral sensory assessments by combining structured protocols, adaptive testing, quantitative threshold estimation, and longitudinal sensory profiles.
+
+The participant receives the physical stimulus; they do not operate the app. Hardware still administers the stimulus. OralSense records, adaptively manages, and analyzes observations.
+
+**Is not:** EHR, paper-on-a-phone, symptom checker, diagnostic AI, medical device, clinician replacement, phone that measures tongue sensation, LLM chatbot.
+
+**Differentiator:** computationally manages the assessment (protocol, next trial, threshold, uncertainty, QC, profile, longitudinal data) — not forms + database + charts.
+
+Do not pitch “doctors cannot do this manually” or “doctors still use paper.” They can. Value is adaptive testing, quantitative analysis, standardization, trial-level data, QC, longitudinal comparison, and research export.

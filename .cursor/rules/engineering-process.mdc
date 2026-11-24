@@ -1,0 +1,28 @@
+---
+description: OralSense engineering process — owner/role, development loop, scope discipline, simplicity, no bloat
+alwaysApply: true
+---
+
+# Engineering process
+
+Full spec: `docs/ENGINEERING_CONTEXT.md`. I (Muhammad Hassan Jamshaid) am the project owner and author. You are a senior engineer helping me, not the autonomous product owner. Do not invent requirements.
+
+**Standard:** minimum necessary complexity + maximum appropriate quality. Priority: correctness → security → data integrity → scientific integrity → reliability → maintainability → performance → reuse → DX → feature completeness.
+
+**Loop for every meaningful task:** stop → understand → inspect existing code → search for reuse → trace data flow → pick the right layer → identify security / data-integrity / scientific risks and edge cases → design the smallest good solution → implement → test (including failure paths) → security + performance review → remove unnecessary code → verify the full user flow and that nothing unrelated broke.
+
+**Scope:** define what changes and what must not. No unrelated refactors, renames, or restructures. Preserve good existing code. If a change has architectural consequences, explain them first.
+
+**Major changes:** propose first (problem, current behavior, proposed change, why, files, DB/API impact, security, performance, tests, risks), then implement once the approach is clear.
+
+**When unsure** about science, data integrity, security, schema, auth, API contracts, or OpenAI behavior: state the ambiguity and consequence, take the safest minimal approach, or ask me.
+
+**No bloat:** no one-method classes, pointless factories, single-use generic abstractions, duplicate clients/validation/state, or files that exist to look impressive. Classes only for genuinely stateful things (assessment engines, protocols, domain models). Functions for calculations, transforms, validation, formatting. Composition over inheritance.
+
+**Naming:** intent-revealing (`calculate_threshold`, `save_trial`, `run_quality_control`), never `process`, `handle`, `helper`, `utils`.
+
+**Comments** explain why, not what. No dead or commented-out code.
+
+**Dependencies:** add only when the existing stack can't do it, the package is maintained and trusted, and it genuinely improves OralSense. Commit lockfiles.
+
+**Do not overengineer:** no microservices, queues, caching layers, extra state libraries, or AI agents. Keep it understandable to a strong student developer.

@@ -1,0 +1,20 @@
+---
+description: OralSense hackathon constraints — full product, science-first, UI built alongside; DSH rubric; honest demo data
+alwaysApply: true
+---
+
+# Hackathon constraints
+
+Build the **complete, hackathon-ready OralSense product**: not a reduced MVP, and not an enterprise platform. It must be a computational assessment engine, not "a healthcare app with AI". Simplify the stack, testing, and deployment, never the product (`docs/MASTER_PROMPT.md`).
+
+DSH Hacks V2 (verified): **Idea, Implementation, Design, Presentation**. Theme: AI × Healthcare. Working software required. Deadline: 14 Nov 2026.
+
+**Order of concerns:** scientific validity, protocol, adaptive and analysis math, and the data model come before visual polish. But UI/UX is a core requirement built with each screen using the design system (`ui-ux-design-system.mdc`), not left to the end. Landing page and marketing screens come late.
+
+**Demo:** do not physically test a tongue. Use published raw data or clearly labelled synthetic trials → show raw data → run engine → threshold + uncertainty (only where the method supports it) → profile → longitudinal comparison. Judges should see the algorithm operate. Label simulated assessments and synthetic participants explicitly.
+
+**Do not pitch:** "doctors still use paper."
+
+**Definition of done:** a screen existing is not done. Its interactions, persistence, and error states must work (`docs/MASTER_PROMPT.md` §20).
+
+Before any feature: check the scientific assumption in `docs/PRODUCT_CONTEXT.md`; keep claims conservative; prefer transparent algorithms; drop work that does not serve the assessment problem.

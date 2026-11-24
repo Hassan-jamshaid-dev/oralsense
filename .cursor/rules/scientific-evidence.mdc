@@ -1,0 +1,19 @@
+---
+description: OralSense scientific evidence — supported claims vs unverified; never invent evidence
+alwaysApply: true
+---
+
+# Scientific evidence
+
+If a claim is not in `docs/PRODUCT_CONTEXT.md` or a cited paper, label it **unverified**. Never invent evidence, outcomes, or demand.
+
+**Supported:** assessment exists; methods are heterogeneous; different methods measure different dimensions; standardization is an issue; the field is active; trials + thresholds are real.
+
+**Not proven:** no software exists; everyone uses paper; OralSense improves outcomes / diagnoses / is validated / is a device / is superior.
+
+Cite only for what the paper actually shows:
+
+- DOI **10.1111/jtxs.12849** (PMID 38961563): heterogeneous methods; no comprehensive standardized assessment. **Not** “there is no software.”
+- PMID **42522166**: new measurement techniques still being developed. **Not** proof OralSense is necessary.
+- PMID **40434896**: modalities can be related → profile rationale. **Not** a diagnosis model.
+- PMID **32150155**: repeated trials and threshold workflows suit structured recording. **Not** OralSense clinical validation.

@@ -1,0 +1,31 @@
+---
+description: OralSense OpenAI integration — advisory QC layer only, backend-only key, structured output, graceful failure
+alwaysApply: true
+---
+
+# OpenAI quality-control layer
+
+Full spec: `docs/OPENAI_INTEGRATION.md`. Do not reinterpret or remove these requirements unless explicitly instructed.
+
+**Two intelligence components, kept separate:**
+
+1. **Adaptive assessment** — deterministic/statistical/psychophysical. Chooses the next trial. Never calls OpenAI.
+2. **AI quality control** — the only place OpenAI is used. Reviews the structure and consistency of a completed assessment and flags patterns for clinician/researcher review.
+
+**Call OpenAI** once per completed assessment, after local quantitative analysis, or when the clinician explicitly requests a review. **Never** per trial, per click, to pick a stimulus, to compute a threshold, or from frontend code.
+
+**OpenAI never changes** `estimated_threshold`, `uncertainty`, raw trial data, protocol, `stimulus_level`, or participant response. Output is advisory. No diagnosis, treatment, health status, invented measurements, or reference ranges.
+
+**Architecture:** React frontend → FastAPI backend → `quality_control_service` → `openai_service` → OpenAI. No OpenAI calls in React components or route handlers.
+
+**Secrets:** `OPENAI_API_KEY` from server env only. Never hard-code, commit `.env`, expose to the browser, or log it.
+
+**Data minimization:** pseudonymous assessment ID, modality, protocol, trials, analysis metrics. No name, contact details, national ID, DOB, or other unneeded identifiers. Avoid logging full payloads.
+
+**Structured output:** require a schema (e.g. `quality_status`, `confidence`, `flags[]`, `summary`, `review_recommended`). Validate on the backend; malformed output = API failure.
+
+**Failure:** assessment and quantitative results stay available; QC status shows "AI quality review unavailable".
+
+**Build order:** workflow → trial storage → adaptive engine → quantitative analysis → QC engine → OpenAI integration → validation. Do not integrate OpenAI before the assessment workflow works.
+
+**Language:** "The AI assists with assessment optimization and measurement-quality review." Never "AI diagnoses", "GPT determines if the patient is healthy", or "AI replaces the clinician".

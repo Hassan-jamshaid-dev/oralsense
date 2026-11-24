@@ -1,0 +1,30 @@
+---
+description: OralSense security, data integrity, and scientific reproducibility — secrets, authz, validation, transactions, provenance
+alwaysApply: true
+---
+
+# Security and data integrity
+
+**Secrets** (`OPENAI_API_KEY`, `DATABASE_URL`, `SECRET_KEY`, JWT/OAuth secrets, tokens, keys, passwords) stay server-side. Never use `VITE_`/`NEXT_PUBLIC_`/`PUBLIC_` prefixes for them; anything shipped to the browser is public. Use `.env` locally; commit only `.env.example` with placeholders.
+
+**Auth:** authentication ≠ authorization. Every protected backend operation enforces authorization server-side. Never trust hidden buttons, frontend routes or state, or client-provided roles or ownership. Guard against IDOR (another user's participant, study, or assessment).
+
+**Validation:** every boundary is untrusted: HTTP input, params, bodies, imported datasets, uploads, external API and OpenAI responses. Frontend validation is UX; backend validation is security. For imports: check type, size, structure, columns, types, duplicates; never trust filenames, never build paths from user input, never execute uploads.
+
+**Errors:** handle explicitly; never swallow. Never show users stack traces, SQL, keys, or internals. Logs carry debugging context but never secrets, tokens, unnecessary patient identifiers, or full sensitive payloads.
+
+**Transactions:** multi-step business operations succeed or fail as a unit; no partial writes leaving invalid state. Boundaries match real business operations, not one giant transaction.
+
+**Duplicates and concurrency:** assume double-clicks, retries, refreshes, multiple tabs. Prevent duplicates with unique constraints, state checks, transactions, idempotency where justified. Never rely only on a disabled button.
+
+**Persistence:** don't lose collected trials on refresh or network failure; persist incrementally where appropriate. Show unsaved / saving / saved / save failed, and never claim "saved" before the backend confirms it.
+
+**Data layers stay separate:** raw trial data → derived scientific results → AI quality flags → clinician notes. AI never overwrites raw or derived data. Keep explicit fields (`stimulus_level`, `participant_response`, `estimated_threshold`, `uncertainty`, `analysis_metrics`, `quality_status`, `quality_flags`, `clinician_notes`).
+
+**Reproducibility and provenance:** store protocol version, analysis version, algorithm parameters, trial data, timestamps. Derived results should be recomputable from raw data. Protocols are versioned and never silently changed; historical results must not appear to come from a newer algorithm. Don't rewrite history.
+
+**Migrations:** before any schema change, check existing data, dependent code, ordering, partial failure, rollback, frontend expectations, and historical interpretability.
+
+**Research data:** preserve attribution, licensing, provenance; keep source data separate from transformed data. Label synthetic, simulated, experimental, or demo data explicitly.
+
+**Before release:** audit auth, IDOR, validation, uploads, CORS, security headers, secret exposure, dependency vulnerabilities, logging, SQL safety, XSS, rate limits on expensive and OpenAI endpoints.

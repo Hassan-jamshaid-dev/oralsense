@@ -1,0 +1,38 @@
+---
+description: OralSense design system — palette tokens, contrast limits, layout, typography, interaction, charts, active assessment screen
+alwaysApply: true
+---
+
+# UI/UX design system
+
+Full spec: `docs/MASTER_PROMPT.md` §6–§8. UI/UX is a core requirement, built with each screen, not a final cosmetic pass. Feel: custom scientific research product, calm, spacious, credible. Not a generic admin template of nested cards.
+
+**Palette (exact, defined once as design tokens; no scattered hex values):**
+
+| Token | Hex | Use |
+|---|---|---|
+| navy | `#102A43` | Sidebar, headings, structure, dark surfaces, primary text |
+| white | `#FFFFFF` | Dominant workspace background |
+| lime | `#A3E635` | Primary CTA, active progress, selected highlight. An accent, never a wash |
+| mist | `#EAF0F5` | Quiet panels, section separation, input surfaces |
+| red | `#EF4444` | Real errors, failed ops, urgent QC attention, destructive warnings only |
+
+Plus restrained neutrals: muted slate secondary text, soft grey borders. Extra status colours only with clear meaning; never convey status by colour alone.
+
+**Contrast (measured):** navy on white ≈ 14.6:1 and navy on lime ≈ 9.7:1 are fine. **Lime on white ≈ 1.5:1**: never use lime for text, thin icons, borders, or focus rings on white. Lime buttons take **navy** text, never white. **Red on white ≈ 3.8:1**: OK for icons and large text, but small error text needs a darker red token that meets 4.5:1.
+
+**Layout:** consistent spacing scale, generous section spacing, readable line lengths and max widths, one obvious primary action per page, clear page heading. Restrained persistent sidebar on desktop; collapse to a usable pattern on small screens; stack logically rather than shrinking. No horizontal scroll except genuine data tables.
+
+**Typography:** Inter (or similar sans). One type scale for titles, sections, body, descriptions, labels, metadata, numeric results. Hierarchy via weight and spacing. Never visually exaggerate a measurement beyond its meaning.
+
+**Surfaces:** cards only when they group related info. Subtle borders, restrained radii, light separation. No nested cards, heavy shadows, pill overload, badge clutter, gradients, or neon.
+
+**Interaction:** every control works. Restrained hover and focus states, visible focus, keyboard navigation, inline validation, confirm only truly destructive actions, undo or correction where practical, actionable empty states, tooltips only for unclear icons. Animation communicates state, progress, or navigation only; short; respects `prefers-reduced-motion`; never slows a workflow.
+
+**Forms:** grouped sections, real labels (not placeholder-only), required markers, preserve input on failure, block duplicate submits, show save status, progressive disclosure.
+
+**Charts (Recharts only):** titles, labelled axes with units, sensible scales, tooltips, legends for multiple series, missing ≠ zero, empty and insufficient-data states, a text or table alternative for key results. No controls that do nothing. No 3D or decoration.
+
+**Active assessment screen:** its own focused layout, minimal nav and noise. Priority: identifier → current procedure and trial → response controls → progress → save status → next/back → protocol guidance. Navy structure, white workspace, mist secondary regions, lime for the main progression action, red only for real problems. Fast with mouse and keyboard; no unnecessary modals.
+
+Inspiration (Race Pakistan site): confidence, identity, motion only. Never copy its branding, layout, or assets.

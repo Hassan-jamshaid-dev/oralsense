@@ -1,0 +1,24 @@
+---
+description: OralSense assessment engine — modular protocol/trial/adaptive/analysis/profile; three-modality first slice
+alwaysApply: true
+---
+
+# Assessment engine
+
+Keep modules separate and explainable:
+
+```text
+Protocol → Trial → Adaptive testing → Analysis → Profile → Longitudinal data
+```
+
+Intelligence = choose informative trials and estimate a threshold with uncertainty. **Not** an LLM chatbot or medical advice. The adaptive and analysis engines are deterministic and never call an LLM; the only LLM use is the advisory OpenAI QC layer in `openai-quality-control.mdc`.
+
+Allowed: Bayesian adaptive methods, staircases, threshold estimation, sequential logic, consistency/QC. ML only if it has a real purpose.
+
+Store trial-level data, not just a final number: participant ID, assessment ID, modality, trial number, stimulus level, response, timestamp, protocol version.
+
+**First prototype:** real (simplified) trial engines for **tactile, thermal, and chemesthetic**. The oral-sensory profile is computed from those results, **not stubbed**.
+
+Do not invent stimulus magnitudes, reference ranges, or clinical cutoffs. Justify protocols from published methods. Do not claim clinical superiority.
+
+If an implementation is only CRUD/forms/charts, it is the wrong product.

@@ -1,0 +1,27 @@
+---
+description: OralSense stack and layering — React/TS/Vite/Tailwind/Recharts, FastAPI, PostgreSQL/SQLAlchemy/Alembic, focused testing, simple deployment, no CI
+alwaysApply: true
+---
+
+# Stack and architecture
+
+Desktop-first web app; must still work on tablet and smaller screens. Change the stack only with a strong documented reason. Simplify the stack, testing, and deployment — not the product (`docs/MASTER_PROMPT.md`).
+
+- **Frontend:** React + TypeScript (strict, avoid `any` and unsafe assertions) + Vite + **Tailwind CSS** + **Recharts** (the only chart library) + **Lucide** icons. shadcn/ui where useful, never as a wall of generic cards. Organize by feature: app shell and nav, reusable UI, feature pages, typed API client, form validation, charts, shared types, loading/error/empty states. Local state by default; no global state library or giant context without real need. Untrusted client: no secrets, no privileged auth logic, no scientific formulas.
+- **Backend:** Python, FastAPI, Pydantic at every API boundary, Uvicorn, plain REST (no GraphQL), one backend. Layering: Route → Service → Domain/Analysis → data access → Database. Thin routes; no business logic, math, DB logic, or OpenAI calls in handlers. Simple data-access layer, not an over-abstract repository framework.
+- **Database:** PostgreSQL only; never substitute SQLite. SQLAlchemy; every schema change via Alembic. Never auto-create tables on startup. PK/FK/unique/not-null/check constraints, transactions, indexes justified by real query patterns.
+- **Science:** NumPy/SciPy only where mathematically justified, in modules independent of UI and routes; deterministic, testable, documented. Never LLM-dependent.
+- **AI:** OpenAI only via the backend, prompts and model config in dedicated modules, optional (see `openai-quality-control.mdc`).
+- **Do not add** Redis, Celery or other workers, Kafka, Kubernetes, microservices, message brokers, GraphQL, competing UI/chart libraries, or complex cloud infra unless genuinely required.
+
+Repo layout: `frontend/`, `backend/` (`app/`, `tests/`, `alembic/`), `docs/`, root `.gitignore`, `.env.example`, `LICENSE`, `README.md`. README must never document functionality that does not exist.
+
+**APIs:** clear names, typed consistent response and error models, correct status codes. When a contract changes, update backend, frontend, and tests together. No API versioning until justified. CORS limited to the actual frontend origin.
+
+**Testing (focused, not enormous):** pytest for core calculations and validation, critical API workflows, persistence and relationships, invalid or incomplete assessment data, and AI failure not breaking the app. Plus one focused end-to-end walkthrough of the main journey. Frontend tests only where important UI logic warrants it. Always include failure paths. Don't test decorative details.
+
+**UI states:** loading, success, error, empty, disabled, retry, saving, saved. These must reflect real backend state; never fake them. Accessibility is part of correctness.
+
+**Performance:** optimize only measured or clearly justified bottlenecks. Avoid N+1 queries, repeated relationship loading, oversized payloads, repeated requests, needless re-renders. Don't blanket-apply `useMemo`/`useCallback`/`memo`. Paginate potentially large lists. No caching or queue infrastructure without evidence.
+
+**Deployment:** must run locally from documented steps (PostgreSQL setup, `.env.example`, migrations, frontend and backend commands, AI key explanation). Managed Postgres plus straightforward frontend/backend hosting. Docker optional. **No CI/CD** unless trivially useful and verifiable. Never claim a deployment works unless it was performed and verified.

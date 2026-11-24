@@ -1,0 +1,22 @@
+---
+description: OralSense git rules — commit/push only on explicit request, identity check, author credit, commit format, secret scan
+alwaysApply: true
+---
+
+# Git workflow
+
+**Never commit or push unless the user explicitly asks in that message.** Finishing a task is not permission to commit.
+
+**Author:** Muhammad Hassan Jamshaid. Never credit Cursor, AI assistants, ChatGPT, or yourself. Never fabricate contributors. No `Co-authored-by` AI trailers: after committing, check `git log -1 --format=%B` and remove any injected AI trailer before pushing.
+
+**Identity:** before committing, run `git config user.name` and `git config user.email`. If they don't match the author, **stop and tell the user**. Never change git identity without permission.
+
+**Before every commit:** review `git status`, `git diff`, `git diff --cached`. Never blind `git add .` / commit / push. Stage files deliberately. Check for secrets, `.env` files, credentials, keys, generated files, local datasets, debug or temp files, patient information, private research data.
+
+**Secret found:** stop and do not push. If a secret already reached history, treat it as compromised and recommend immediate rotation/revocation.
+
+**Commit message format:** `OralSense: <clear description>` (e.g. `OralSense: add adaptive assessment engine`). Never `fix stuff`, `update`, `final2`, `test`, `asdf`. Group commits logically; no floods of tiny commits.
+
+**`.gitignore`:** maintain the root minimum set from `docs/ENGINEERING_CONTEXT.md` §21. Never ignore source code. Modify only when the project actually requires it.
+
+**Destructive operations** (deleting or recreating remote repos, force-push, history rewrites) require explicit user instruction.

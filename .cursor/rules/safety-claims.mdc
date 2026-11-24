@@ -1,0 +1,27 @@
+---
+description: OralSense safety and claim boundaries — no diagnosis, fake ranges, or unlabeled synthetic data
+alwaysApply: true
+---
+
+# Safety and claims
+
+Never diagnose, recommend treatment, replace clinicians, or display “Patient has disease X.”
+
+Frame outputs as **measured sensory characteristics**, not diagnosis.
+
+Never:
+
+- Claim clinical validation or that an algorithm is clinically superior without experimental evidence
+- Invent medical reference ranges or hard-code arbitrary medical values
+- Direct users into unsafe oral / chemical / thermal experiments
+- Pretend a phone physically measures sensation
+- Present prototype results as clinical conclusions
+- Fake datasets or circular validation (fit the algorithm to a paper’s final number)
+
+The hackathon adaptive engine is a **technical prototype**, not clinically validated software.
+
+If using synthetic data, label it, e.g.:
+
+> Synthetic validation dataset generated using published test parameters. Demonstrates the analysis engine and adaptive workflow; this is not clinical validation.
+
+Never present synthetic data as real patient data. If no public raw dataset exists, say so.
